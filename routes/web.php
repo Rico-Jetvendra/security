@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\WEB\{
+use App\Http\Controllers\Web\{
     ActivityLogsController,
     ApplicationController,
     LoginController,
