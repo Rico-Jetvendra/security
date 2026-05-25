@@ -87,7 +87,7 @@
 
 <script>
     const columns           = @json($columns);
-    const permissions       = @json(session('permission'));
+    const permissions       = @json(session('permission_security'));
     const modal             = $('#crudModal');
     const form              = $('#crudForm');
     const defaultSearch     = $('#defaultSearch').val();

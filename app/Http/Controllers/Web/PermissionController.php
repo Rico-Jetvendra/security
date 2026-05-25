@@ -36,14 +36,14 @@ class PermissionController extends Controller{
             ->addColumn('action', function ($row) use ($basePermission) {
                 $buttons = '';
 
-                if(in_array($basePermission.'.edit', session('permission', []))){
+                if(in_array($basePermission.'.edit', session('permission_security', []))){
                     $buttons .= '
                     <button class="btn btn-sm btn-warning btn-edit text-white" data-id="'.$row->id.'">
                         <i class="bi bi-pencil"></i>
                     </button>';
                 }
 
-                if(in_array($basePermission.'.delete', session('permission', []))){
+                if(in_array($basePermission.'.delete', session('permission_security', []))){
                     $buttons .= '
                     <button class="btn btn-sm btn-danger btn-delete" data-id="'.$row->id.'" data-name="'.$row->name.'">
                         <i class="bi bi-trash"></i>

@@ -20,7 +20,7 @@ class VerifyLoggerApiKey{
         }
 
         foreach ($applications as $app) {
-            if (Hash::check($requestKey, $app->api_key)) {
+            if (Hash::check($requestKey, $app->application_key)) {
                 $valid = true;
                 break;
             }

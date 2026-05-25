@@ -47,7 +47,7 @@ class LoginController extends Controller{
 
         $validated = $validator->validated();
 
-        $user = User::where('application_id', '=', 3)->where('email', '=', $validated['email'])->first();
+        $user = User::where('email', '=', $validated['email'])->first();
         if(!$user){
             ActivityLogger::failedLogin(['email' => $validated['email'], 'description' => 'User not found.']);
             return redirect()->route('web.index')->with('error', 'User not found!');
@@ -74,12 +74,13 @@ class LoginController extends Controller{
                             ->where('ur.user_id', $user->id)
                             ->where('ur.status', '=', '1')
                             ->where('p.status', '=', '1')
+                            ->where('p.application_id', '=', '3')
                             ->where('rp.status', '=', '1')
                             ->pluck('p.name')
                             ->toArray();
 
         $user->update(['login_date' => Carbon::now()]);
-        session(['user_security' => $user, 'permission' => $permissions]);
+        session(['user_security' => $user, 'permission_security' => $permissions]);
 
         // Prevent session fixation
         $request->session()->regenerate();
@@ -92,7 +93,7 @@ class LoginController extends Controller{
     public function logout(Request $request){
         ActivityLogger::logout();
 
-        $request->session()->forget(['user_security', 'permission']);
+        $request->session()->forget(['user_security', 'permission_security']);
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 

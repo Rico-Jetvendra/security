@@ -181,7 +181,7 @@
 
 <script>
     const columns          = @json($columns);
-    const permissions      = @json(session('permission'));
+    const permissions      = @json(session('permission_security'));
     const basePermission   = "{{ permission() }}";
 
     const tableColumns  = [

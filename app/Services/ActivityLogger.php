@@ -90,8 +90,6 @@ class ActivityLogger{
 
                 'subject_type'  => $data['subject_type'] ?? null,
                 'subject_id'    => $data['subject_id'] ?? null,
-
-                'created_at'    => now()
             ]);
         } catch (\Exception $e) {
             Log::error('Activity Logger Error: ' . $e->getMessage());

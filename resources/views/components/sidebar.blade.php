@@ -23,7 +23,7 @@
             >
                 @foreach (config('combobox.menu') as $item)
 
-                    @if(!isset($item['permission']) || in_array($item['permission'], session('permission', [])))
+                    @if(!isset($item['permission']) || in_array($item['permission'], session('permission_security', [])))
 
                         @if (!isset($item['children']))
                             <li class="nav-item">
@@ -63,7 +63,7 @@
                                         return true;
                                     }
 
-                                    return in_array($child['permission'], session('permission', []));
+                                    return in_array($child['permission'], session('permission_security', []));
 
                                 });
                             @endphp

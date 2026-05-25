@@ -39,14 +39,14 @@ class UserRoleController extends Controller{
             ->addColumn('action', function ($row) use ($basePermission) {
                 $buttons = '';
 
-                if(in_array($basePermission.'.edit', session('permission', []))){
+                if(in_array($basePermission.'.edit', session('permission_security', []))){
                     $buttons .= '
                     <button class="btn btn-sm btn-warning btn-edit text-white" data-id="'.$row->user_roles_id.'">
                         <i class="bi bi-pencil"></i>
                     </button>';
                 }
 
-                if(in_array($basePermission.'.delete', session('permission', []))){
+                if(in_array($basePermission.'.delete', session('permission_security', []))){
                     $buttons .= '
                     <button class="btn btn-sm btn-danger btn-delete" data-id="'.$row->user_roles_id.'" data-name="'.$row->user_name.'">
                         <i class="bi bi-trash"></i>
@@ -75,7 +75,9 @@ class UserRoleController extends Controller{
                 'required',
                 'integer',
                 'exists:tbl_users,id',
-                Rule::unique('t_user_roles', 'user_id'),
+                Rule::unique('t_user_roles')->where(function ($query) use ($request) {
+                    return $query->where('role_id', $request->role_id);
+                }),
             ],
             'role_id' => 'required|integer|exists:t_roles,id',
         ]);

@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        @if(in_array(permission('add'), session('permission', [])))
+        @if(in_array(permission('add'), session('permission_security', [])))
             <button class="btn btn-primary btn-create">
                 <i class="bi bi-plus"></i> Add
             </button>
@@ -17,9 +17,9 @@
                     @endforeach
 
                     @if(
-                        in_array(permission('edit'), session('permission', []))
+                        in_array(permission('edit'), session('permission_security', []))
                         ||
-                        in_array(permission('delete'), session('permission', []))
+                        in_array(permission('delete'), session('permission_security', []))
                     )
                         <th width="120">Aksi</th>
                     @endif
