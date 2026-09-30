@@ -203,7 +203,12 @@ class MemberController extends Controller{
 
     private function getSelect(){
         $teams = Teams::get();
-        $users = User::join('phidb.arsalesrep as rep', 'rep.id', '=', 'tbl_users.kode_sales')->select('tbl_users.*', 'rep.repnm as member_name', 'tbl_users.id as user_id')->get();
+        $users = User::leftJoin('phidb.arsalesrep as rep', 'rep.id', '=', 'tbl_users.kode_sales')
+                    ->select(
+                        'tbl_users.*',
+                        DB::raw('COALESCE(rep.repnm, tbl_users.username) as member_name'),
+                        'tbl_users.id as user_id'
+                    )->get();
 
         $data = [
             "teams" => $teams,
