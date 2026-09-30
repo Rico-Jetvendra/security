@@ -112,7 +112,7 @@ class RoleController extends Controller{
         $data = $this->getSql()->where('t_roles.id', $id)->firstOrFail();
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255|unique:t_roles,name',
+            'name' => 'required|string|max:255|unique:t_roles,name,' . $id,
             'application_id' => 'required|integer|exists:t_application,application_id',
             'dashboard'       => 'nullable|string',
             'description' => 'nullable|string',
