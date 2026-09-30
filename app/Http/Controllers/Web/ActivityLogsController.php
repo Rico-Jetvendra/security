@@ -27,6 +27,8 @@ class ActivityLogsController extends Controller{
     public function data(){
         $query = $this->getSql()->get();
 
+        dd($query->first());
+
         return DataTables::of($query)
             ->addIndexColumn()
             ->addColumn('action', function($row){
