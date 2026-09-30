@@ -13,6 +13,8 @@ class Member extends Model{
         'user_id',
         'teams_id',
         'is_leader',
+        "created_date",
+        "created_by",
     ];
 
     protected $casts = [
