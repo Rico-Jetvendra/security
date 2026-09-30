@@ -162,7 +162,7 @@ class MemberController extends Controller{
     }
 
     public function destroy($id){
-        $data = Member::findOrFail($id);
+        $data = Member::where('member_id', $id)->first();
 
         try {
             $oldValues = $data->toArray();
