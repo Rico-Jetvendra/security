@@ -27,25 +27,27 @@ class ActivityLogsController extends Controller{
     public function data(){
         $query = $this->getSql()->get();
 
-        dd($query->first());
-
-        return DataTables::of($query)
-            ->addIndexColumn()
-            ->addColumn('action', function($row){
-                $text = '
-                    <span class="text-primary clickable-log"
-                        style="cursor:pointer;"
-                        data-row=\''.json_encode($row).'\'>
-                        '.$row->action.'
-                    </span>
-                ';
-                return $text;
-            })
-            ->addColumn('created_at', function($row){
-                return Carbon::parse($row->created_at)->format('d F Y H:i:s');
-            })
-            ->rawColumns(['username', 'action'])
-            ->make(true);
+        try {
+            return DataTables::of($query)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $text = '
+                        <span class="text-primary clickable-log"
+                            style="cursor:pointer;"
+                            data-row=\''.json_encode($row).'\'>
+                            '.$row->action.'
+                        </span>
+                    ';
+                    return $text;
+                })
+                ->addColumn('created_at', function($row){
+                    return Carbon::parse($row->created_at)->format('d F Y H:i:s');
+                })
+                ->rawColumns(['username', 'action'])
+                ->make(true);
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
     }
 
     public function view($id){
