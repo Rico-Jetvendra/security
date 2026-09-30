@@ -32,6 +32,7 @@
     :fields="[
         ['name' => 'application_name', 'id' => 'application_id', 'label' => 'Application', 'type' => 'select', 'required' => true],
         ['name' => 'name', 'id' => 'name', 'label' => 'Nama Role', 'type' => 'text', 'required' => true],
+        ['name' => 'dashboard', 'id' => 'dashboard', 'label' => 'Default Dashboard', 'type' => 'text', 'required' => false],
         ['name' => 'description', 'id' => 'description', 'label' => 'Description', 'type' => 'textarea', 'required' => false],
     ]"
     :selects="[
@@ -57,6 +58,7 @@
         fields: {
             'application_id': 'application_name',
             'name': 'name',
+            'dashboard': 'dashboard',
             'description': 'description'
         },
         columns: columns,

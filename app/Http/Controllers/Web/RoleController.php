@@ -77,6 +77,7 @@ class RoleController extends Controller{
                 })
             ],
             'application_id'    => 'required|integer|exists:t_application,application_id',
+            'dashboard'       => 'nullable|string',
             'description'       => 'nullable|string',
         ]);
 
@@ -113,6 +114,7 @@ class RoleController extends Controller{
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255|unique:t_roles,name',
             'application_id' => 'required|integer|exists:t_application,application_id',
+            'dashboard'       => 'nullable|string',
             'description' => 'nullable|string',
         ]);
 
