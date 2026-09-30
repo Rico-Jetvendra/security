@@ -167,11 +167,7 @@ class MemberController extends Controller{
         try {
             $oldValues = $data->toArray();
 
-            $data->update([
-                'status'        => '0',
-                'deleted_date'  => now(),
-                'deleted_by'    => session('user_security')->id ?? 1
-            ]);
+            $data->delete();
 
             ActivityLogger::delete([
                 'subject_type'  => 'Member',
