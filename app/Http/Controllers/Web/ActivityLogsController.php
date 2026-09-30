@@ -27,7 +27,7 @@ class ActivityLogsController extends Controller{
     public function data(){
         $query = $this->getSql()->get();
 
-        return DataTables::of($query)
+        return DataTables::eloquent($query)
             ->addIndexColumn()
             ->addColumn('action', function($row){
                 $text = '
