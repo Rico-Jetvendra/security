@@ -21,6 +21,7 @@ class RoleController extends Controller{
         $columns = [
             ['label' => 'Application', 'field' => 'application_name'],
             ['label' => 'Role', 'field' => 'name'],
+            ['label' => 'Dashboard', 'field' => 'dashboard'],
         ];
 
         $selects = $this->getSelect();
