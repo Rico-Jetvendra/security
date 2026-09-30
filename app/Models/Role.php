@@ -18,6 +18,7 @@ class Role extends Model{
         "name",
         "description",
         "status",
+        "dashboard",
     ];
     protected $defaultSort = 'created_at';
 
@@ -26,6 +27,7 @@ class Role extends Model{
         "description",
         "application_id",
         "status",
+        "dashboard",
         "created_at",
         "created_by",
         "updated_at",
