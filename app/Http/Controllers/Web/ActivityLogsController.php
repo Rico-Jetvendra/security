@@ -13,9 +13,9 @@ class ActivityLogsController extends Controller{
         $data = $this->getSql()->get();
 
         $columns = [
-            ['label' => 'User', 'field' => 'username'],
             ['label' => 'Module', 'field' => 'module'],
             ['label' => 'Action', 'field' => 'action'],
+            ['label' => 'User', 'field' => 'username'],
             ['label' => 'Subject Type', 'field' => 'subject_type'],
             ['label' => 'Subject ID', 'field' => 'subject_id'],
             ['label' => 'Created Date', 'field' => 'created_at'],
@@ -29,12 +29,12 @@ class ActivityLogsController extends Controller{
 
         return DataTables::of($query)
             ->addIndexColumn()
-            ->addColumn('username', function($row){
+            ->addColumn('action', function($row){
                 $text = '
                     <span class="text-primary clickable-log"
                         style="cursor:pointer;"
                         data-row=\''.json_encode($row).'\'>
-                        '.$row->username.'
+                        '.$row->action.'
                     </span>
                 ';
                 return $text;
@@ -56,7 +56,7 @@ class ActivityLogsController extends Controller{
     }
 
     private function getSql(){
-        $sql = ActivityLogs::join('tbl_users as us', 'us.id', 't_activity_logs.user_id')
+        $sql = ActivityLogs::leftJoin('tbl_users as us', 'us.id', 't_activity_logs.user_id')
                             ->select(
                                 't_activity_logs.*',
                                 'us.username'

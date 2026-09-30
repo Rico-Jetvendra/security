@@ -17,6 +17,8 @@
                     ['label' => 'Role Permission', 'route' => 'web.role-permission.index', 'permission' => 'security.role_permission'],
                     ['label' => 'User', 'route' => 'web.user.index', 'permission' => 'security.user'],
                     ['label' => 'User Role', 'route' => 'web.user-role.index', 'permission' => 'security.user_role'],
+                    ['label' => 'Teams', 'route' => 'web.teams.index', 'permission' => 'security.teams'],
+                    ['label' => 'Member', 'route' => 'web.member.index', 'permission' => 'security.member'],
                 ]
             ],
             [

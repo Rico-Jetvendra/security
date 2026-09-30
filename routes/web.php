@@ -6,9 +6,11 @@ use App\Http\Controllers\Web\{
     ApplicationController,
     LoginController,
     LoginHistoryController,
+    MemberController,
     RoleController,
     RolePermissionController,
     PermissionController,
+    TeamsController,
     UserRoleController,
     UserController,
 };
@@ -33,6 +35,8 @@ Route::middleware(['web'])->name('web.')->group(function () {
         Route::get('/user-role/data', [UserRoleController::class, 'data'])->name('user-role.data')->middleware('permission:security.user_role');
         Route::get('/login-history/data', [LoginHistoryController::class, 'data'])->name('login-history.data')->middleware('permission:monitoring.login_history');
         Route::get('/activity-logs/data', [ActivityLogsController::class, 'data'])->name('activity-logs.data')->middleware('permission:monitoring.activity_logs');
+        Route::get('/teams/data', [TeamsController::class, 'data'])->name('teams.data')->middleware('permission:security.teams');
+        Route::get('/member/data', [MemberController::class, 'data'])->name('member.data')->middleware('permission:security.member');
 
         // Custom
         Route::get('/role-permission/select', [RolePermissionController::class, 'getRolePermission'])->name('role-permission.select')->middleware('permission:security.role_permission');
@@ -46,6 +50,8 @@ Route::middleware(['web'])->name('web.')->group(function () {
         Route::resource('role-permission', RolePermissionController::class)->middleware('permission:security.role_permission');
         Route::resource('user-role', UserRoleController::class)->middleware('permission:security.user_role');
         Route::resource('user', UserController::class)->middleware('permission:security.user');
-});
+        Route::resource('teams', TeamsController::class)->middleware('permission:security.teams');
+        Route::resource('member', MemberController::class)->middleware('permission:security.member');
+    });
 
 });

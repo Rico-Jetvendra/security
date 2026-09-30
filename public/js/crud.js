@@ -65,7 +65,7 @@ function initCrud({ routes, fields, columns, permissions, basePermission }) {
                     var el = $('#' + key);
 
                     if(fields[key] == 'checkbox'){
-                        el.prop('checked', true);
+                        el.prop('checked', res[key]);
                     }
 
                     if (el[0].tomselect) {
