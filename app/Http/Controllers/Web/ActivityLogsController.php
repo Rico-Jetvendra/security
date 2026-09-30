@@ -29,20 +29,20 @@ class ActivityLogsController extends Controller{
 
         return DataTables::of($query)
             ->addIndexColumn()
-            // ->addColumn('action', function($row){
-            //     $text = '
-            //         <span class="text-primary clickable-log"
-            //             style="cursor:pointer;"
-            //             data-row=\''.json_encode($row).'\'>
-            //             '.$row->action.'
-            //         </span>
-            //     ';
-            //     return $text;
-            // })
+            ->addColumn('action', function($row){
+                $text = '
+                    <span class="text-primary clickable-log"
+                        style="cursor:pointer;"
+                        data-row=\''.json_encode($row).'\'>
+                        '.$row->action.'
+                    </span>
+                ';
+                return $text;
+            })
             ->addColumn('created_at', function($row){
                 return Carbon::parse($row->created_at)->format('d F Y H:i:s');
             })
-            ->rawColumns(['username', 'action'])
+            ->rawColumns(['action'])
             ->make(true);
     }
 
