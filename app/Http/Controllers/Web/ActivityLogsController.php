@@ -45,8 +45,8 @@ class ActivityLogsController extends Controller{
                 })
                 ->rawColumns(['username', 'action'])
                 ->make(true);
-        } catch (\Exception $e) {
-            dd($e->getMessage());
+        } catch (\Throwable $e) {
+            dd($e->getMessage(), $e->getTraceAsString());
         }
     }
 
