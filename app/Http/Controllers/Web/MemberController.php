@@ -194,7 +194,7 @@ class MemberController extends Controller{
                         't_member.*',
                         't.teams_name',
                         't.teams_description',
-                        'rep.repnm as member_name',
+                        DB::raw('COALESCE(rep.repnm, us.username) as member_name'),
                         'us.username',
                     );
 
