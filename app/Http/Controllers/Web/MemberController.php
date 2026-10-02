@@ -21,6 +21,7 @@ class MemberController extends Controller{
             ['label' => 'Teams', 'field' => 'teams_name'],
             ['label' => 'Member', 'field' => 'member_name'],
             ['label' => 'Username', 'field' => 'username'],
+            ['label' => 'Role', 'field' => 'name'],
             ['label' => 'Leader', 'field' => 'is_leader'],
         ];
 
@@ -65,6 +66,9 @@ class MemberController extends Controller{
             })
             ->filterColumn('username', function($query, $keyword){
                 $query->where('us.username', 'like', "%$keyword%");
+            })
+            ->filterColumn('name', function($query, $keyword){
+                $query->where('r.name', 'like', "%$keyword%");
             })
             ->filterColumn('is_leader', function($query, $keyword){
                 $keyword = strtolower(trim($keyword));
@@ -186,12 +190,15 @@ class MemberController extends Controller{
         $sql = Member::leftJoin('t_teams as t', 't.teams_id', 't_member.teams_id')
                     ->leftJoin('tbl_users as us', 'us.id', '=', 't_member.user_id')
                     ->leftJoin('phidb.arsalesrep as rep', 'rep.id', '=', 'us.kode_sales')
+                    ->leftJoin('t_user_roles as ur', 'ur.user_id', '=', 'us.id')
+                    ->leftJoin('t_roles as r', 'r.id', '=', 'ur.role_id')
                     ->select(
                         't_member.*',
                         't.teams_name',
                         't.teams_description',
                         DB::raw('COALESCE(rep.repnm, us.username) as member_name'),
                         'us.username',
+                        'r.name',
                     );
 
         return $sql;
